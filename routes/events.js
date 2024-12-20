@@ -31,7 +31,7 @@ router.get('/events', auth, async (req, res) => {
 });
 
 router.get('/events/public', async (req, res) => {
-  const events = await Events.find({ date: { $gte: new Date() } });
+  const events = await Events.find();
   res.json(events);
 });
 
