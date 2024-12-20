@@ -4,9 +4,9 @@ import Events from '../models/Events.js';
 const router = Router();
 
 router.post('/events', auth, async (req, res) => {
-  const event = new Event({ ...req.body, admin: req.user._id });
-  await event.save();
-  res.json(event);
+  const event = new Events({ ...req.body, admin: req.user._id });
+  const newEvent = await event.save();
+  res.json(newEvent);
 });
 
 router.put('/events/:id', auth, async (req, res) => {
