@@ -5,10 +5,10 @@ const eventSchema = new Schema({
   description: { type: String },
   image: [{ type: String, default: 'https://via.placeholder.com/150' }],
   date: { type: Date },
-  location: { type: String, required: true },
-  price: { type: Number, required: true },
-  seats: { type: Number, required: true },
-  category: [{ type: String, required: true }],
+  location: { type: String, },
+  price: { type: Number },
+  seats: { type: Number },
+  category: [{ type: String }],
   registeredCount: { type: Number, default: 0 },
 });
 export default model('Event', eventSchema);

@@ -12,7 +12,7 @@ router.post('/events', auth, async (req, res) => {
 router.put('/events/:id', auth, async (req, res) => {
   const event = await Events.findById(req.params.id);
   if (!event) return res.status(404).json({ message: 'Event not found' });
-  if (event.admin.toString() !== req.user._id) return res.status(403).json({ message: 'Forbidden' });
+  if (event.admin.toString() !== req.user._id.toString()) return res.status(403).json({ message: 'Forbidden' });
   const updatedEvent = await Events.findByIdAndUpdate(req.params.id, req.body, { new: true });
   res.json(updatedEvent);
 });
@@ -20,7 +20,7 @@ router.put('/events/:id', auth, async (req, res) => {
 router.delete('/events/:id', auth, async (req, res) => {
   const event = await Events.findById(req.params.id);
   if (!event) return res.status(404).json({ message: 'Event not found' });
-  if (event.admin.toString() !== req.user._id) return res.status(403).json({ message: 'Forbidden' });
+  if (event.admin.toString() !== req.user._id.toString()) return res.status(403).json({ message: 'Forbidden' });
   await Events.findByIdAndDelete(req.params.id);
   res.json({ message: 'Event deleted' });
 });
