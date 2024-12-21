@@ -9,6 +9,12 @@ router.post('/events', auth, async (req, res) => {
   res.json(newEvent);
 });
 
+router.get('/events/:id', async (req, res) => {
+  const event = await Events.findById(req.params.id);
+  if (!event) return res.status(404).json({ message: 'Event not found' });
+  res.json(event);
+});
+
 router.put('/events/:id', auth, async (req, res) => {
   const event = await Events.findById(req.params.id);
   if (!event) return res.status(404).json({ message: 'Event not found' });
@@ -31,7 +37,7 @@ router.get('/events', auth, async (req, res) => {
 });
 
 router.get('/events/public', async (req, res) => {
-  const events = await Events.find();
+  const events = await Events.find({date: {$gte: new Date()}});
   res.json(events);
 });
 
