@@ -15,6 +15,8 @@ router.get('/events/:id', async (req, res) => {
   res.json(event);
 });
 
+
+
 router.put('/events/:id', auth, async (req, res) => {
   const event = await Events.findById(req.params.id);
   if (!event) return res.status(404).json({ message: 'Event not found' });
